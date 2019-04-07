@@ -1,0 +1,55 @@
+# 2019-04-07
+
+## Introduction
+### 19: Running Code Examples
+- `npm install`
+- `npm start`
+### 20: Angular CLI
+- `ng serve`
+- `ng build`
+- `ng e2e`
+### 22: Getting Help
+- Community chat room: https://gitter.im/ng-book/ng-book
+- Email: mailto:us@fullstack.io
+
+## Writing Your First Angular Web Application
+### 4: Node.js and npm
+- Instal Node directly; using homebrew has been known to cause some issues
+- `npm -v`
+- `npm install -g typescript`
+- `npm install -g @angular/cli`
+- `ng --version`
+- `brew install watchman`
+- `ng --help`
+### 6: Example Project
+- `ng new angular-hello-world`
+- `tree -F -L 1`
+  - Can be installed via `brew install tree`
+- https://github.com/ReactiveX/rxjs/issues/4540
+- `ng serve`
+- http://localhost:4200
+- `ng serve --port 9001`
+### 12: Making a Component
+- `ng generate component hello-world`
+- 14:
+  - Notice that we suffix our TypeScript file with .ts instead of .js The problem is our browser doesn’t know how to interpret TypeScript files. To solve this gap, the ng serve command live-compiles our .ts to a .js file automatically.
+  - Notice that the structure of this import is of the format import { things } from wherever. In the { things } part what we are doing is called destructuring. 
+- 15:
+  - Personally, if our templates are shorter than a page, we much prefer to have the templates alongside the code (that is, within the .ts file). When we see both the logic and the view together, it’s easy to understand how they interact with one another.
+- 16
+  - Angular uses a concept called “style-encapsulation” which means that styles specified for a particular component only apply to that component.
+  - You may have noticed that this key is different from template in that it accepts an array as it’s argument. This is because we can load multiple stylesheets for a single component.
+- 19
+  - On the template notice that we added a new syntax: {{ name }}. The brackets are called template tags (or sometimes mustache tags).
+  - Whatever is between the template tags will be expanded as an expression. Here, because the template is bound to our Component, the name will expand to the value of this.name i.e. 'Felipe'.
+- 21
+  - The first change to point out is the new string[] property on our UserListComponent class. This syntax means that names is typed as an Array of strings. Another way to write this would be Array<string>.
+- 22
+  - The *ngFor syntax says we want to use the NgFor directive on this attribute.
+  - The value states: "let name of names". names is our array of names as specified on the UserListComponent object. let name is called a reference. When we say "let name of names" we’re saying loop over each element in names and assign each one to a local variable called name.
+  - Note that the capitalization here isn’t a typo: NgFor is the capitalization of the class that implements the logic and ngFor is the “selector” for the attribute we want to use.
+- 25
+  - To pass values to a component we use the bracket [] syntax in our template - let’s take a look at our updated template:
+- 26
+  - In Angular when we add an attribute in brackets like [foo] we’re saying we want to pass a value to the input named foo on that component.
+- 
