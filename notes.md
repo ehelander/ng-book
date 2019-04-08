@@ -1,4 +1,6 @@
-# 2019-04-07
+## Errors
+- p. 31
+  - `But first thing’s first` -> `things`
 
 ## Introduction
 ### 19: Running Code Examples
@@ -52,4 +54,21 @@
   - To pass values to a component we use the bracket [] syntax in our template - let’s take a look at our updated template:
 - 26
   - In Angular when we add an attribute in brackets like [foo] we’re saying we want to pass a value to the input named foo on that component.
+- 27
+  - ng will look at the file angular.json to find the entry point to our app.
+- 28
+  - main.ts is the entry-point for our app and it bootstraps our application
+  - We use the AppModule to bootstrap the app. AppModule is specified in src/app/app.module.ts
+  - AppModule specifies which component to use as the top-level component. In this case it is
+     AppComponent
+  - declarations
+    - declarations specifies the components that are defined in this module. This is an important idea in Angular
+    - when we generated a new component, the ng tool assumed we wanted it to belong to the current NgModule.
+- 29
+  - imports
+    - imports describes which dependencies this module has.
+  - providers
+    - providers is used for dependency injection. So to make a service available to be injected throughout our application, we will add it here.
+  - bootstrap
+    - bootstrap tells Angular that when this module is used to bootstrap an app, we need to load the AppComponent component as the top-level component.
 - 
