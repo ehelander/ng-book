@@ -1,6 +1,8 @@
 ## Errors
 - p. 31
   - `But first thing’s first` -> `things`
+- p. 16
+  - `accepts an array as it’s argument` -> `its`
 
 ## Introduction
 ### 19: Running Code Examples
@@ -45,7 +47,7 @@
   - On the template notice that we added a new syntax: {{ name }}. The brackets are called template tags (or sometimes mustache tags).
   - Whatever is between the template tags will be expanded as an expression. Here, because the template is bound to our Component, the name will expand to the value of this.name i.e. 'Felipe'.
 - 21
-  - The first change to point out is the new string[] property on our UserListComponent class. This syntax means that names is typed as an Array of strings. Another way to write this would be Array<string>.
+  - The first change to point out is the new string[] property on our UserListComponent class. This syntax means that names is typed as an Array of strings. Another way to write this would be `Array<string>`.
 - 22
   - The *ngFor syntax says we want to use the NgFor directive on this attribute.
   - The value states: "let name of names". names is our array of names as specified on the UserListComponent object. let name is called a reference. When we say "let name of names" we’re saying loop over each element in names and assign each one to a local variable called name.
@@ -71,4 +73,21 @@
     - providers is used for dependency injection. So to make a service available to be injected throughout our application, we will add it here.
   - bootstrap
     - bootstrap tells Angular that when this module is used to bootstrap an app, we need to load the AppComponent component as the top-level component.
-- 
+#### The Application Component
+- 33
+  - We tell Angular we want to respond to an event by surrounding the event name in parentheses ().
+- 34
+  - Notice that the addArticle() function can accept two arguments: the title and the link arguments. We need to change our template button to pass those into the call to the addArticle(). We do this by populating a template variable by adding a special syntax to the input elements on our form. 
+- 35
+  - Binding `input`s to values
+    - Notice that in the input tags we used the # (hash) to tell Angular to assign those tags to a *local variable*.
+    - This markup tells Angular to *bind* this `<input>` to the variable `newtitle`. The `#newtitle` syntax is called a *resolve*. 
+    - `newtitle` is now an **object** that represents this `input` DOM element (specifically, the type is `HTMLInputElement`). Because `newtitle` is an object, that means we get the value of the input tag using `newtitle.value`.
+  - Binding actions to events
+    - On our button tag we add the attribute `(click)` to define what should happen when the button is clicked on.
+#### Adding the Article Component
+- 39
+  - Notice that we can use template strings in **attribute values**, as in the href of the a tag: `href="{{ link }}"`.
+- 41
+  - In Angular, a component *host* is the **element this component is attached to**. We can set properties on the host element by using the `@HostBinding()` decorator. In this case, we’re asking Angular to keep the value of the host elements class to be in sync with the property `cssClass`.
+  - Using the `@HostBinding()` is nice because it means we can encapsulate the `app-article` markup *within* our component. That is, we don’t have to both use an `app-article` tag and require a `class="row"` in the markup of the parent view. By using the `@HostBinding` decorator, we’re able to configure our host element from *within* the component.
