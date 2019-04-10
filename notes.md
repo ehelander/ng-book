@@ -3,6 +3,8 @@
   - `But first thing’s first` -> `things`
 - p. 16
   - `accepts an array as it’s argument` -> `its`
+- 50
+  - `Checkout our ArticleComponent component definition now` -> `Check out`
 
 ## Introduction
 ### 19: Running Code Examples
@@ -91,3 +93,26 @@
 - 41
   - In Angular, a component *host* is the **element this component is attached to**. We can set properties on the host element by using the `@HostBinding()` decorator. In this case, we’re asking Angular to keep the value of the host elements class to be in sync with the property `cssClass`.
   - Using the `@HostBinding()` is nice because it means we can encapsulate the `app-article` markup *within* our component. That is, we don’t have to both use an `app-article` tag and require a `class="row"` in the markup of the parent view. By using the `@HostBinding` decorator, we’re able to configure our host element from *within* the component.
+- 43
+  - In order to tell our `AppComponent` about our new `ArticleComponent` component, we need to **add the `ArticleComponent` to the list of declarations in this `NgModule`**.
+  - We add `ArticleComponent` to our `declarations` because `ArticleComponent` is part of this module (`AppModule`). However, if `ArticleComponent` were part of a different module, then we might import it with `imports`.
+  - when you create a new component, you have to put in a `declarations` in `NgModules`.
+- 45
+  - JavaScript, by default, **propagates the `click` event to all the parent components**. Because the `click` event is propagated to parents, our browser is trying to follow the empty link, which tells the browser to reload.
+  - To fix that, we need to make the `click` event handler to return `false`. This will ensure the browser won’t try to refresh the page.
+#### Rendering Multiple Rows
+- 45
+  - A good practice when writing Angular code is to try to isolate the data structures we are using from the component code. To do this, let’s create a data structure that represents a single article.
+- 46
+  - Here we are creating a new class that represents an `Article`. Note that this is a **plain class and not an Angular component**. In the Model-View-Controller pattern this would be the **Model**.
+  - Instead of storing the properties directly on the `ArticleComponent` component let’s **store the properties on an instance of the `Article` class**.
+- 48
+  - This situation is better but something in our code is still off: our `voteUp` and `voteDown` methods break the encapsulation of the `Article` class by changing the article’s internal properties directly.
+  - `voteUp` and `voteDown` currently break the [Law of Demeter](http://en.wikipedia.org/wiki/Law_of_Demeter) which says that a given object should assume as little as possible about the structure or properties of other objects.
+- 50
+  - The reason we have a `voteUp()` and a `voteDown()` on both classes is because each function does a slightly different thing. The idea is that the `voteUp()` on the `ArticleComponent` relates to the **component view**, whereas the `Article` model `voteUp()` defines what *mutations* happen **in the model**.
+  - That is, it allows the `Article` class to encapsulate what functionality should happen **to a model** when voting happens. In a “real” app, the internals of the `Article` model would probably be more complicated, e.g. make an API request to a webserver, and you wouldn’t want to have that sort of model-specific code in your component controller.
+  - Similarly, in the `ArticleComponent` we return `false`; as a way to say “don’t propagate the event” - this is a view-specific piece of logic and we shouldn’t allow the `Article` model’s `voteUp()` function to have to knowledge about that sort of view-specific API. That is, the `Article` model should allow voting apart from the specific view.
+  - Checkout our `ArticleComponent` component definition now: it’s so short! We’ve moved a lot of logic out of our component and into our models. The corresponding MVC guideline here might be **[Fat Models, Skinny Controllers](http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model)**. The idea is that we want to move most of our logic to our models so that our components do the minimum work possible.
+#### Storing Multiple `Article`s
+- abc
